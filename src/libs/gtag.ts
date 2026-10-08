@@ -2,6 +2,12 @@ import { CONFIG } from "site.config"
 export const GA_TRACKING_ID = CONFIG.googleAnalytics.config.measurementId
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
+declare global {
+  interface Window {
+    gtag: (...args: unknown[]) => void
+  }
+}
+
 export const pageview = (url: any) => {
   if (typeof window !== "object") return
   window.gtag("config", GA_TRACKING_ID, {
